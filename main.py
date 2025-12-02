@@ -1,26 +1,26 @@
-GASTOS_FILE_PATH = "./database/gastos.json"
-
-print("===========================================")
-print("         Simulador de Gasto Diario         ")
-print("===========================================")
-print("Seleccione una opción:\n")
-print("1. Registrar nuevo gasto")
-print("2. Listar gastos")
-print("3. Calcular total de gastos")
-print("4. Generar reporte de datos")
-print("5. SALIR")
-print("===========================================")
-opcion = int(input(": "))
-while True:
+import json
+GASTOS_FILE_PATH = "./gastos.json"
+while True :
+    print("===========================================")
+    print("         Simulador de Gasto Diario         ")
+    print("===========================================")
+    print("Seleccione una opción:\n")
+    print("1. Registrar nuevo gasto")
+    print("2. Listar gastos")
+    print("3. Calcular total de gastos")
+    print("4. Generar reporte de datos")
+    print("5. SALIR")
+    print("===========================================")
+    opcion = int(input("=> "))
     match opcion:
         case 1:
             print("=============================================")
             print("Registrar Nuevo Gasto")
             print("=============================================")            
             print("Ingrese la información del gasto:\n")
-            ValorInput = input("- Monto del gasto: ")
+            ValorInput = int(input("- Monto del gasto: "))
             CategoríaInput = input("- Categoría (ej. comida, transporte, entretenimiento, otros): ")  
-            Descripción = input("- Descripción (opcional):\n ")
+            DescripciónInput = input("- Descripción (opcional):\n ")
             if CategoríaInput == "comida":
                 print("Comida agregado")
             elif CategoríaInput == "transporte":
@@ -29,9 +29,19 @@ while True:
                 print("Entretenimiento agregado")
             elif CategoríaInput == "otros":
                 print("Otros agregado") 
-            GuardarOCancelar = input("Ingrese 'S' para guardar o 'C' para cancelar.")
-            print("=============================================")
+            if DescripciónInput == "":
+                Descripción = "N/A" 
+            Gastos_a_Añadir = {
+                "Valor": ValorInput,
+                "Categoría": CategoríaInput,
+                "Descripción": DescripciónInput,     
+                      }
+            print("=============================================")    
+            GuardarOCancelar = input("Ingrese 'S' para guardar o 'C' para cancelar\n =>")
             if GuardarOCancelar.upper == "S":
+                with open("Gastos.json", "w") as f:
+                    json.dump(Gastos_a_Añadir, f, indent=4)
+                    break
                 break
             elif GuardarOCancelar.upper == "C":
                 break
@@ -51,12 +61,14 @@ while True:
                 case 1:
                     print("gastos: ")
                 case 2: 
+                    print("==========================")
                     print("¿Que categoría desea ver?")
                     print("1. Comida")
                     print("2. Transporte")
                     print("3. Entretenimiento")
                     print("4. Otros")
                     print("5. SALIR")
+                    print("==========================")
                     Categoría = int(input(": "))
                     match Categoría:
                         case 1:
@@ -117,5 +129,11 @@ while True:
                     print("saliendo...")
                     break                            
         case 5:
-            print("Gracias por usar el sistema")
-            print("Vuelva Pronto")
+            print(":::::::::::::::::::::::::::::::::::::::::::::::::::::")
+            salir = input("Quiere salir del programa? (S/N)\n")
+
+            if salir == "S":
+                print("Gracias por usar el sistema <3")
+                break
+            elif salir == "N":
+                print("volviendo")
