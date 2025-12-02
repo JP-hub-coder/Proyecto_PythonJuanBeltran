@@ -1,0 +1,14 @@
+[
+    {
+        "Valor": 12000,
+        "Categoria": "comida",
+        "Descripcion": "almuerzo",
+        "Fecha": "01/12/2025"
+    },
+    {
+        "Valor": 12000,
+        "Categoria": "aaaa",
+        "Descripcion": "almuerzo",
+        "Fecha": "01/12/2025"
+    }
+]
