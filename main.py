@@ -17,13 +17,14 @@ while True :
     opcion = int(input("=> "))
     match opcion:
         case 1:
+            limpieza()
             print("=============================================")
             print("Registrar Nuevo Gasto")
             print("=============================================")            
             print("Ingrese la información del gasto:\n")
             Gastos_a_Añadir = {
                 "Valor": int(input("- Monto del gasto: ")),
-                "Categoria": input("- Categoría (ej. comida, transporte, entretenimiento, otros): "),
+                "Categoria": input("- Categoría (ej. comida, transporte, entretenimiento, otros)\n(en minúscula): "),
                 "Descripcion": input("- Descripción (opcional, si no: N/A):\n"),     
                 "Fecha": input("-Ingrese la fecha de hoy(DD/MM/AAAA): ") 
                       }
@@ -78,20 +79,51 @@ while True :
 
                             TEMPLATE = "{:<12}{:<22}{:<17}{:>}"
                             TEMPLATE_TITLE = "{:^6}{:^22}{:^23}{:^}"
-                            for gasto in info:
-                                print("== C O M I D A S ==")
-                                print(TEMPLATE_TITLE.format("VALOR","CATEGORÍA","DESCRIPCIÓN","FECHA"))
-                                print(TEMPLATE.format(gasto['Valor'],gasto['Categoria'],gasto['Descripcion'],gasto['Fecha']))
+                            print("== C O M I D A S ==")
+                            print(TEMPLATE_TITLE.format("VALOR","CATEGORÍA","DESCRIPCIÓN","FECHA"))
+                            for gasto in info:    
+                                print(TEMPLATE.format(gasto["Valor"],gasto["Categoria"],gasto["Descripcion"],gasto["Fecha"]))
                         case 2: 
-                            print("Transporte:")
+                            limpieza()
+                            GastoTransporte = "transporte"
+                            gastos = readFile(GASTOS_FILE_PATH)
+                            info = findCategoria(gastos, "Categoria" , GastoTransporte)
+
+                            TEMPLATE = "{:<12}{:<22}{:<17}{:>}"
+                            TEMPLATE_TITLE = "{:^6}{:^22}{:^23}{:^}"
+                            print("== T R A N S P O R T E ==")
+                            print(TEMPLATE_TITLE.format("VALOR","CATEGORÍA","DESCRIPCIÓN","FECHA"))
+                            for gasto in info:    
+                                print(TEMPLATE.format(gasto["Valor"],gasto["Categoria"],gasto["Descripcion"],gasto["Fecha"]))
                         case 3:
-                            print("Entretenimiento: ")
+                            limpieza()
+                            GastoEntretenimiento = "entretenimiento"
+                            gastos = readFile(GASTOS_FILE_PATH)
+                            info = findCategoria(gastos, "Categoria" , GastoEntretenimiento)
+
+                            TEMPLATE = "{:<12}{:<22}{:<17}{:>}"
+                            TEMPLATE_TITLE = "{:^6}{:^22}{:^23}{:^}"
+                            print("== C O M I D A S ==")
+                            print(TEMPLATE_TITLE.format("VALOR","CATEGORÍA","DESCRIPCIÓN","FECHA"))
+                            for gasto in info:    
+                                print(TEMPLATE.format(gasto["Valor"],gasto["Categoria"],gasto["Descripcion"],gasto["Fecha"]))
                         case 4: 
-                            print("Otros:")
+                            limpieza()
+                            GastoOtros = "otros"
+                            gastos = readFile(GASTOS_FILE_PATH)
+                            info = findCategoria(gastos, "Categoria" , GastoOtros)
+
+                            TEMPLATE = "{:<12}{:<22}{:<17}{:>}"
+                            TEMPLATE_TITLE = "{:^6}{:^22}{:^23}{:^}"
+                            print("== C O M I D A S ==")
+                            print(TEMPLATE_TITLE.format("VALOR","CATEGORÍA","DESCRIPCIÓN","FECHA"))
+                            for gasto in info:    
+                                print(TEMPLATE.format(gasto["Valor"],gasto["Categoria"],gasto["Descripcion"],gasto["Fecha"]))
                 case 3: 
                     input("Ingrese la fecha a filtrar(DD/MM/AAAA): ")
                     print("Filtrado: ")
                 case 4:
+                    print("Volviendo al menú...")
                     break
 
         case 3:
@@ -114,7 +146,7 @@ while True :
                     print("Total del mes")
                 case 4:
                     print("Saliendo...")
-                    break
+                    
 
         case 4:
             print("=============================================")
@@ -136,7 +168,7 @@ while True :
                     print("Reporte mensual: ")
                 case 4:
                     print("saliendo...")
-                    break                            
+                                                
         case 5:
             print("==================================================")
             salir = input("Quiere salir del programa? (S/N)\n")
@@ -145,4 +177,4 @@ while True :
                 print("Gracias por usar el sistema <3")
                 break
             elif salir == "N":
-                print("volviendo")
+                print("Volviendo")
