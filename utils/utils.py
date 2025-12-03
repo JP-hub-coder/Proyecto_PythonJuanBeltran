@@ -5,9 +5,9 @@ def limpieza():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def findCategoria(datalist, key, valor):
-    info = {}
-    for i in range(len(datalist)):
-        if datalist[i].get(key) == valor:
-            info["Categoria"] = datalist [i]
-            break
+    info = []
+    for item in datalist:
+        if item.get(key) == valor:
+            info.append(item)
     return info
+
