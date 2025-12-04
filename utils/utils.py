@@ -40,7 +40,7 @@ def totalDiario(datalist):
         if gasto["Fecha"] == hoy:
             total += gasto["Valor"]
 
-    print(f"Total gastado HOY ({hoy}): ${total}")
+    print(f"Total gastado hoy ({hoy}): ${total}")
 
 def totalMensual(datalist):
     hoy = datetime.now()
