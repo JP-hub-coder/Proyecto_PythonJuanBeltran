@@ -158,7 +158,7 @@ while True :
                     totalMensual(gastos)
                 case 4:
                     print("Saliendo...")
-                    
+
                     
 
         case 4:
@@ -174,11 +174,14 @@ while True :
             ReporteGastos = int(input(":"))
             match ReporteGastos:
                 case 1:
-                    print("Reporte diario:")
+                    gastos = readFile(GASTOS_FILE_PATH)
+                    reporteDiario(gastos)
                 case 2:
-                    print("Reporter semanal: ")
+                    gastos = readFile(GASTOS_FILE_PATH)
+                    reporteSemanal(gastos)
                 case 3:
-                    print("Reporte mensual: ")
+                    gastos = readFile(GASTOS_FILE_PATH)
+                    reporteMensual(gastos)
                 case 4:
                     print("saliendo...")
                                                 
