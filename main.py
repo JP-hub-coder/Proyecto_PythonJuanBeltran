@@ -119,9 +119,18 @@ while True :
                             print(TEMPLATE_TITLE.format("VALOR","CATEGORÍA","DESCRIPCIÓN","FECHA"))
                             for gasto in info:    
                                 print(TEMPLATE.format(gasto["Valor"],gasto["Categoria"],gasto["Descripcion"],gasto["Fecha"]))
-                case 3: 
-                    input("Ingrese la fecha a filtrar(DD/MM/AAAA): ")
-                    print("Filtrado: ")
+                case 3:
+                    FechaInicio = input("Ingrese la fecha inicio(DD/MM/AAAA): ")
+                    FechaFin = input("Ingrese la fecha fin(DD/MM/AAAA): ")
+                    fechas = readFile(GASTOS_FILE_PATH)
+                    info = findFecha(fechas, "Fecha", FechaInicio)
+                    info += findFecha(fechas, "Fecha", FechaFin)
+                    TEMPLATE = "{:<12}{:<22}{:<17}{:>}"
+                    TEMPLATE_TITLE = "{:^6}{:^22}{:^23}{:^}"
+                    print(f"== {FechaInicio} - {FechaFin} ==")
+                    print(TEMPLATE_TITLE.format("VALOR","CATEGORÍA","DESCRIPCIÓN","FECHA"))
+                    for gasto in info:    
+                        print(TEMPLATE.format(gasto["Valor"],gasto["Categoria"],gasto["Descripcion"],gasto["Fecha"]))
                 case 4:
                     print("Volviendo al menú...")
                     break
@@ -139,13 +148,17 @@ while True :
             TotalGastos = int(input(":"))
             match TotalGastos:
                 case 1:
-                    print("Total del dia de hoy:")
+                    gastos = readFile(GASTOS_FILE_PATH)
+                    totalDiario(gastos)
                 case 2: 
-                    print("Total de la semana:")
+                    gastos = readFile(GASTOS_FILE_PATH)
+                    totalSemanal(gastos)
                 case 3:
-                    print("Total del mes")
+                    gastos = readFile(GASTOS_FILE_PATH)
+                    totalMensual(gastos)
                 case 4:
                     print("Saliendo...")
+                    
                     
 
         case 4:
