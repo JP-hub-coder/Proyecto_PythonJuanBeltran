@@ -26,8 +26,8 @@ def totalSemanal(datalist):
     total = 0
 
     for gasto in datalist:
-        fecha_gasto = datetime.strptime(gasto["Fecha"], "%d/%m/%Y")
-        if fecha_gasto >= hace_7_dias:
+        fechaGasto = datetime.strptime(gasto["Fecha"], "%d/%m/%Y")
+        if fechaGasto >= hace_7_dias:
             total += gasto["Valor"]
 
     print(f"Total gastado en los últimos 7 días: ${total}")
