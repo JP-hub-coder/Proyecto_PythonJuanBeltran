@@ -14,7 +14,7 @@ while True :
     print("4. Generar reporte de datos")
     print("5. SALIR")
     print("===========================================")
-    opcion = int(input("=> "))
+    opcion = ValidarOpcion()
     match opcion:
         case 1:
             limpieza()
@@ -22,11 +22,12 @@ while True :
             print("Registrar Nuevo Gasto")
             print("=============================================")            
             print("Ingrese la información del gasto:\n")
+            # {}= diccionario
             Gastos_a_Añadir = {
-                "Valor": int(input("- Monto del gasto: ")),
-                "Categoria": input("- Categoría (ej. comida, transporte, entretenimiento, otros)\n(en minúscula): "),
-                "Descripcion": input("- Descripción (opcional, si no: N/A):\n"),     
-                "Fecha": input("-Ingrese la fecha de hoy(DD/MM/AAAA): ") 
+                "Valor": ValidarMonto(),
+                "Categoria": input("- Categoría (ej. comida, transporte, entretenimiento, otros)\n(en minúscula): ").lower().strip(),
+                "Descripcion": ValidarCantidadDescripcion(),     
+                "Fecha":ValidarFecha() 
                       }
             print("=============================================")    
             GuardarOCancelar = input("Ingrese 'S' para guardar o 'C' para cancelar\n =>").lower()
@@ -48,18 +49,14 @@ while True :
             print("3. Filtrar por rango de fechas")
             print("4. Regresar al menú principal")
             print("=============================================")
-            listar = int(input(": "))
+            listar = Validarlistar()
             match listar:
                 case 1:
+                    limpieza()
                     TEMPLATE = "{:<12}{:<22}{:<17}{:>}"
                     TEMPLATE_TITLE = "{:^6}{:^22}{:^23}{:^}"
-
-                    limpieza()
                     gastos = readFile(GASTOS_FILE_PATH)
-                    print("=== G A S T O S  R E G I S T R A D O S ===")
-                    print(TEMPLATE_TITLE.format("VALOR","CATEGORÍA","DESCRIPCIÓN","FECHA"))
-                    for gasto in gastos :
-                        print(TEMPLATE.format(gasto['Valor'],gasto['Categoria'],gasto['Descripcion'],gasto['Fecha']))
+                    ImprimirResultados("R E G I S T R O  D E  G A S T O S", gastos)
                 case 2: 
                     print("==========================")
                     print("¿Que categoría desea ver?")
@@ -69,68 +66,40 @@ while True :
                     print("4. Otros")
                     print("5. SALIR")
                     print("==========================")
-                    Categoría = int(input(": "))
-                    match Categoría:
+                    Categoria = ValidarCategoria()
+
+                    match Categoria:
                         case 1:
                             limpieza()
                             GastoComida = "comida"
                             gastos = readFile(GASTOS_FILE_PATH)
                             info = findCategoria(gastos, "Categoria" , GastoComida)
-
-                            TEMPLATE = "{:<12}{:<22}{:<17}{:>}"
-                            TEMPLATE_TITLE = "{:^6}{:^22}{:^23}{:^}"
-                            print("== C O M I D A S ==")
-                            print(TEMPLATE_TITLE.format("VALOR","CATEGORÍA","DESCRIPCIÓN","FECHA"))
-                            for gasto in info:    
-                                print(TEMPLATE.format(gasto["Valor"],gasto["Categoria"],gasto["Descripcion"],gasto["Fecha"]))
+                            ImprimirResultados("C O M I D A", info)
                         case 2: 
                             limpieza()
                             GastoTransporte = "transporte"
                             gastos = readFile(GASTOS_FILE_PATH)
                             info = findCategoria(gastos, "Categoria" , GastoTransporte)
-
-                            TEMPLATE = "{:<12}{:<22}{:<17}{:>}"
-                            TEMPLATE_TITLE = "{:^6}{:^22}{:^23}{:^}"
-                            print("== T R A N S P O R T E ==")
-                            print(TEMPLATE_TITLE.format("VALOR","CATEGORÍA","DESCRIPCIÓN","FECHA"))
-                            for gasto in info:    
-                                print(TEMPLATE.format(gasto["Valor"],gasto["Categoria"],gasto["Descripcion"],gasto["Fecha"]))
+                            ImprimirResultados("T R A N S P O R T E",info)
                         case 3:
                             limpieza()
                             GastoEntretenimiento = "entretenimiento"
                             gastos = readFile(GASTOS_FILE_PATH)
                             info = findCategoria(gastos, "Categoria" , GastoEntretenimiento)
-
-                            TEMPLATE = "{:<12}{:<22}{:<17}{:>}"
-                            TEMPLATE_TITLE = "{:^6}{:^22}{:^23}{:^}"
-                            print("== C O M I D A S ==")
-                            print(TEMPLATE_TITLE.format("VALOR","CATEGORÍA","DESCRIPCIÓN","FECHA"))
-                            for gasto in info:    
-                                print(TEMPLATE.format(gasto["Valor"],gasto["Categoria"],gasto["Descripcion"],gasto["Fecha"]))
+                            ImprimirResultados("E N T R E T E N I M I E N T O", info)
                         case 4: 
                             limpieza()
                             GastoOtros = "otros"
                             gastos = readFile(GASTOS_FILE_PATH)
                             info = findCategoria(gastos, "Categoria" , GastoOtros)
-
-                            TEMPLATE = "{:<12}{:<22}{:<17}{:>}"
-                            TEMPLATE_TITLE = "{:^6}{:^22}{:^23}{:^}"
-                            print("== C O M I D A S ==")
-                            print(TEMPLATE_TITLE.format("VALOR","CATEGORÍA","DESCRIPCIÓN","FECHA"))
-                            for gasto in info:    
-                                print(TEMPLATE.format(gasto["Valor"],gasto["Categoria"],gasto["Descripcion"],gasto["Fecha"]))
+                            ImprimirResultados("O T R O S", info)
                 case 3:
-                    FechaInicio = input("Ingrese la fecha inicio(DD/MM/AAAA): ")
-                    FechaFin = input("Ingrese la fecha fin(DD/MM/AAAA): ")
+                    FechaInicio = ValidarFechaInicio()
+                    FechaFin = ValidarFechaFin()
                     fechas = readFile(GASTOS_FILE_PATH)
                     info = findFecha(fechas, "Fecha", FechaInicio)
                     info += findFecha(fechas, "Fecha", FechaFin)
-                    TEMPLATE = "{:<12}{:<22}{:<17}{:>}"
-                    TEMPLATE_TITLE = "{:^6}{:^22}{:^23}{:^}"
-                    print(f"== {FechaInicio} - {FechaFin} ==")
-                    print(TEMPLATE_TITLE.format("VALOR","CATEGORÍA","DESCRIPCIÓN","FECHA"))
-                    for gasto in info:    
-                        print(TEMPLATE.format(gasto["Valor"],gasto["Categoria"],gasto["Descripcion"],gasto["Fecha"]))
+                    ImprimirReporteFecha(FechaInicio, FechaFin, info)
                 case 4:
                     print("Volviendo al menú...")
                     break
@@ -145,7 +114,7 @@ while True :
             print("3. Calcular total mensual")
             print("4. Regresar al menú principal")
             print("=============================================")
-            TotalGastos = int(input(":"))
+            TotalGastos = ValidarTotalGastos()
             match TotalGastos:
                 case 1:
                     gastos = readFile(GASTOS_FILE_PATH)
@@ -159,8 +128,6 @@ while True :
                 case 4:
                     print("Saliendo...")
 
-                    
-
         case 4:
             print("=============================================")
             print("Generar Reporte de Gastos")
@@ -171,7 +138,7 @@ while True :
             print("3. Reporte mensual")
             print("4. Regresar al menú principal")
             print("=============================================")
-            ReporteGastos = int(input(":"))
+            ReporteGastos = ValidarReporteGastos()
             match ReporteGastos:
                 case 1:
                     gastos = readFile(GASTOS_FILE_PATH)
