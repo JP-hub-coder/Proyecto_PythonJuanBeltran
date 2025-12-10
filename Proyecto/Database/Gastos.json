@@ -1,0 +1,44 @@
+[
+    {
+        "Valor": 10000,
+        "Categoria": "transporte",
+        "Descripcion": "no habia bus",
+        "Fecha": "02/12/2025"
+    },
+    {
+        "Valor": 50000,
+        "Categoria": "entretenimiento",
+        "Descripcion": "salida a comer",
+        "Fecha": "02/12/2025"
+    },
+    {
+        "Valor": 80000,
+        "Categoria": "comida",
+        "Descripcion": "mercado de la semana",
+        "Fecha": "15/12/2025"
+    },
+    {
+        "Valor": 20000,
+        "Categoria": "otros",
+        "Descripcion": "N/A",
+        "Fecha": "02/12/2025"
+    },
+    {
+        "Valor": 50000,
+        "Categoria": "comida",
+        "Descripcion": "N/A",
+        "Fecha": "03/12/2025"
+    },
+    {
+        "Valor": 90000,
+        "Categoria": "transporte",
+        "Descripcion": "N/A",
+        "Fecha": "01/12/2025"
+    },
+    {
+        "Valor": 10000,
+        "Categoria": "entretenimiento",
+        "Descripcion": "era un fin de semana cualquiera, estaba aburrido, pero resulta que pasa que sucede que acontece que me entretuve en el centro comercial",
+        "Fecha": "05/12/2025"
+    }
+]

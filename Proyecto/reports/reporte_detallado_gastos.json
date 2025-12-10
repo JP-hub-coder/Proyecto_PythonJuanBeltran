@@ -1,0 +1,14 @@
+[
+    {
+        "Valor": 90000,
+        "Categoria": "transporte",
+        "Descripcion": "N/A",
+        "Fecha": "01/12/2025"
+    },
+    {
+        "Valor": 10000,
+        "Categoria": "entretenimiento",
+        "Descripcion": "era un fin de semana cualquiera, estaba aburrido, pero resulta que pasa que sucede que acontece que me entretuve en el centro comercial",
+        "Fecha": "05/12/2025"
+    }
+]
